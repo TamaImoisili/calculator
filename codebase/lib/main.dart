@@ -290,11 +290,15 @@ class _MyHomePageState extends State<MyHomePage> {
   void _plusMinus() {
     setState(() {
       if (curCalcChange) {
-        currentCalculation *= -1;
-        currentCalculationSTR = currentCalculation.toString();
+        if (currentCalculation != 0) {
+          currentCalculation *= -1;
+          currentCalculationSTR = currentCalculation.toString();
+        }
       } else {
-        prevCalc *= -1;
-        currentCalculationSTR = prevCalc.toString();
+        if (prevCalc != 0) {
+          prevCalc *= -1;
+          currentCalculationSTR = prevCalc.toString();
+        }
       }
     });
   }

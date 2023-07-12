@@ -33493,9 +33493,13 @@ if(q===0)B.c.L(r)},
 $S:0}
 A.WT.prototype={
 $0(){var s,r=this.a
-if(r.w){s=r.e*=-1
-r.d=B.c.j(s)}else{s=r.f*=-1
-r.d=B.c.j(s)}},
+if(r.w){s=r.e
+if(s!==0){s*=-1
+r.e=s
+r.d=B.c.j(s)}}else{s=r.f
+if(s!==0){s*=-1
+r.f=s
+r.d=B.c.j(s)}}},
 $S:0}
 A.WX.prototype={
 $0(){this.a.MJ()},
