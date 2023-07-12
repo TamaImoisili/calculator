@@ -67,41 +67,6 @@ class _MyHomePageState extends State<MyHomePage> {
   String clear = "AC";
   String prevFunction = "";
   bool visualMode = true;
-  // Color unclickedColour = const Color.fromARGB(255, 105, 106, 114);
-  // Color clickedColour = const Color.fromARGB(255, 250, 252, 254);
-  // Color topButtonbackground = const Color.fromARGB(255, 42, 45, 53);
-
-  // Color topContainer = const Color.fromARGB(255, 35, 37, 45);
-  // Color bottomContainer = const Color.fromARGB(255, 35, 37, 45);
-  // Color buttonColor = const Color.fromARGB(255, 40, 43, 51);
-  // Color textColor = const Color.fromARGB(255, 255, 255, 255);
-
-  /*void _DarkOrLightMode() {
-    setState(() {
-      if (visualMode) {
-        //dark mode
-        /*
-        topContainer = const Color.fromARGB(255, 35, 37, 45);
-        bottomContainer = const Color.fromARGB(255, 35, 37, 45);
-        buttonColor = const Color.fromARGB(255, 40, 43, 51);
-        topButtonbackground = const Color.fromARGB(255, 42, 45, 53);
-        */
-        unclickedColour = const Color.fromARGB(255, 105, 106, 114);
-        clickedColour = const Color.fromARGB(255, 250, 252, 254);
-      } else {
-        //light mode
-        /*
-        topContainer = const Color.fromARGB(255, 255, 255, 255);
-        bottomContainer = const Color.fromARGB(255, 249, 249, 249);
-        buttonColor = const Color.fromARGB(255, 247, 247, 247);
-        textColor = const Color.fromARGB(255, 30, 30, 30);
-        topButtonbackground = const Color.fromARGB(255, 249, 249, 249);
-        */
-        unclickedColour = const Color.fromARGB(255, 226, 226, 226);
-        clickedColour = const Color.fromARGB(255, 65, 65, 70);
-      }
-    });
-  }*/
 
   void _ac() {
     //Adjusts the AC button to clear and vice versa as inputs are entered
@@ -276,13 +241,24 @@ class _MyHomePageState extends State<MyHomePage> {
       } else {
         currentCalculationSTR;
       }
-      try {
-        currentCalculation = int.parse(currentCalculationSTR);
-      } catch (e) {
-        currentCalculation = double.parse(currentCalculationSTR);
-      }
-      if (currentCalculation is double && currentCalculation % 1 == 0) {
-        currentCalculation.toInt();
+      if (curCalcChange) {
+        try {
+          currentCalculation = int.parse(currentCalculationSTR);
+        } catch (e) {
+          currentCalculation = double.parse(currentCalculationSTR);
+        }
+        if (currentCalculation is double && currentCalculation % 1 == 0) {
+          currentCalculation.toInt();
+        }
+      } else {
+        try {
+          prevCalc = int.parse(currentCalculationSTR);
+        } catch (e) {
+          prevCalc = double.parse(currentCalculationSTR);
+        }
+        if (currentCalculation is double && currentCalculation % 1 == 0) {
+          prevCalc.toInt();
+        }
       }
     });
   }
