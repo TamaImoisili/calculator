@@ -67,215 +67,48 @@ class _MyHomePageState extends State<MyHomePage> {
   String clear = "AC";
   String prevFunction = "";
   bool visualMode = true;
-  // Color unclickedColour = const Color.fromARGB(255, 105, 106, 114);
-  // Color clickedColour = const Color.fromARGB(255, 250, 252, 254);
-  // Color topButtonbackground = const Color.fromARGB(255, 42, 45, 53);
-
-  // Color topContainer = const Color.fromARGB(255, 35, 37, 45);
-  // Color bottomContainer = const Color.fromARGB(255, 35, 37, 45);
-  // Color buttonColor = const Color.fromARGB(255, 40, 43, 51);
-  // Color textColor = const Color.fromARGB(255, 255, 255, 255);
-
-  /*void _DarkOrLightMode() {
-    setState(() {
-      if (visualMode) {
-        //dark mode
-        /*
-        topContainer = const Color.fromARGB(255, 35, 37, 45);
-        bottomContainer = const Color.fromARGB(255, 35, 37, 45);
-        buttonColor = const Color.fromARGB(255, 40, 43, 51);
-        topButtonbackground = const Color.fromARGB(255, 42, 45, 53);
-        */
-        unclickedColour = const Color.fromARGB(255, 105, 106, 114);
-        clickedColour = const Color.fromARGB(255, 250, 252, 254);
-      } else {
-        //light mode
-        /*
-        topContainer = const Color.fromARGB(255, 255, 255, 255);
-        bottomContainer = const Color.fromARGB(255, 249, 249, 249);
-        buttonColor = const Color.fromARGB(255, 247, 247, 247);
-        textColor = const Color.fromARGB(255, 30, 30, 30);
-        topButtonbackground = const Color.fromARGB(255, 249, 249, 249);
-        */
-        unclickedColour = const Color.fromARGB(255, 226, 226, 226);
-        clickedColour = const Color.fromARGB(255, 65, 65, 70);
-      }
-    });
-  }*/
+  bool buttonPressed = false;
 
   void _ac() {
     //Adjusts the AC button to clear and vice versa as inputs are entered
-    setState(() {
-      if (clear == "C") {
-        prevCalc = 0;
-        currentCalculationSTR = "0";
-        currentCalculation = 0;
-        clear = "AC";
-      } else {
-        prevCalc = 0;
-        currentCalculationSTR = "0";
-        currentCalculation = 0;
-      }
-    });
+    if (clear == "C") {
+      prevCalc = 0;
+      currentCalculationSTR = "0";
+      currentCalculation = 0;
+      clear = "AC";
+    } else {
+      prevCalc = 0;
+      currentCalculationSTR = "0";
+      currentCalculation = 0;
+    }
+    buttonPressed = false;
   }
 
   void _percentage() {
-    setState(() {
-      currentCalculation = currentCalculation / 100;
-      currentCalculationSTR = currentCalculation.toString();
-      curCalcChange = false;
-    });
+    currentCalculation = currentCalculation / 100;
+    currentCalculationSTR = currentCalculation.toString();
+    curCalcChange = false;
   }
 
   void _addNumber(String num) {
     // adds a number to the current value
-    setState(() {
-      clear = "C";
-      curCalcChange = true;
-      if (calcState) {
+    clear = "C";
+    curCalcChange = true;
+    if (calcState) {
+      currentCalculationSTR = "";
+      currentCalculationSTR += num;
+      try {
+        currentCalculation = int.parse(currentCalculationSTR);
+      } catch (e) {
+        currentCalculation = double.parse(currentCalculationSTR);
+      }
+      calcState = false;
+    } else {
+      if (currentCalculationSTR == "0") {
         currentCalculationSTR = "";
-        currentCalculationSTR += num;
-        try {
-          currentCalculation = int.parse(currentCalculationSTR);
-        } catch (e) {
-          currentCalculation = double.parse(currentCalculationSTR);
-        }
-        calcState = false;
-      } else {
-        if (currentCalculationSTR == "0") {
-          currentCalculationSTR = "";
-        }
-        currentCalculationSTR += num;
-
-        try {
-          currentCalculation = int.parse(currentCalculationSTR);
-        } catch (e) {
-          currentCalculation = double.parse(currentCalculationSTR);
-        }
-        if (currentCalculation is double && currentCalculation % 1 == 0) {
-          currentCalculation.toInt();
-        }
       }
-    });
-  }
+      currentCalculationSTR += num;
 
-  void _addDecimal() {
-    //adds a decimal to the display but not the actual value yet.
-    setState(() {
-      currentCalculationSTR += ".";
-    });
-  }
-
-  void _performCalc(String desiredFunction) {
-    /*An issue with calculation occurs when you use the app as the it often
-    *confuses the previous and current calculations when you enter a value 
-    *and press button it performs a calculation when you do not want to
-    *perform one.*/
-    setState(() {
-      if (desiredFunction == "+") {
-        //addition function that adds the previous to the current calc
-        if (prevCalc == 0) {
-          prevCalc = currentCalculation;
-        } else {
-          if (curCalcChange) {
-            prevCalc += currentCalculation;
-            currentCalculationSTR = prevCalc.toString();
-          }
-        }
-        calcState = true;
-        curCalcChange = false;
-        prevFunction = "+";
-      } else if (desiredFunction == "-") {
-        //subtraction function that adds the previous to the current calc
-        if (prevCalc == 0) {
-          prevCalc = currentCalculation;
-        } else {
-          if (curCalcChange) {
-            prevCalc -= currentCalculation;
-            currentCalculationSTR = prevCalc.toString();
-          }
-        }
-        calcState = true;
-        curCalcChange = false;
-        prevFunction = "-";
-      } else if (desiredFunction == "x") {
-        //multiplication function that multiplies the previous to the current calc
-        if (prevCalc == 0) {
-          prevCalc = currentCalculation;
-        } else {
-          if (currentCalculation == 0 && prevCalc != 0) {
-            return;
-          } else {
-            if (curCalcChange) {
-              prevCalc *= currentCalculation;
-              currentCalculationSTR = prevCalc.toString();
-            }
-          }
-        }
-        calcState = true;
-        curCalcChange = false;
-        prevFunction = "x";
-      } else if (desiredFunction == "÷") {
-        //division isn't handled properly needs to be fixed
-        if (prevCalc == 0) {
-          prevCalc = currentCalculation;
-        } else {
-          if (curCalcChange) {
-            if (currentCalculation == 0) {
-              currentCalculationSTR = "Error";
-            } else {
-              prevCalc /= currentCalculation;
-              currentCalculationSTR = prevCalc.toString();
-            }
-          }
-        }
-        calcState = true;
-        curCalcChange = false;
-        prevFunction = "÷";
-      } else if (desiredFunction == "=") {
-        //equals to fucntion this does the does function that was previously
-        //done
-        if (prevFunction == "+") {
-          prevCalc += currentCalculation;
-          currentCalculationSTR = prevCalc.toString();
-          calcState = true;
-          prevFunction = "+";
-        } else if (prevFunction == "-") {
-          prevCalc -= currentCalculation;
-          currentCalculationSTR = prevCalc.toString();
-          calcState = true;
-          prevFunction = "-";
-        } else if (prevFunction == "x") {
-          prevCalc *= currentCalculation;
-          currentCalculationSTR = prevCalc.toString();
-          calcState = true;
-          prevFunction = "x";
-        } else if (prevFunction == "÷") {
-          if (currentCalculation == 0) {
-            currentCalculationSTR = "Error";
-          } else {
-            prevCalc /= currentCalculation;
-            currentCalculationSTR = prevCalc.toString();
-            calcState = true;
-            prevFunction = "÷";
-          }
-        }
-        curCalcChange = false;
-      }
-    });
-  }
-
-  void _undo() {
-    setState(() {
-      if (currentCalculationSTR.isNotEmpty) {
-        currentCalculationSTR = currentCalculationSTR.substring(
-            0, currentCalculationSTR.length - 1);
-        if (currentCalculationSTR.isEmpty) {
-          currentCalculationSTR = "0";
-        }
-      } else {
-        currentCalculationSTR;
-      }
       try {
         currentCalculation = int.parse(currentCalculationSTR);
       } catch (e) {
@@ -284,23 +117,165 @@ class _MyHomePageState extends State<MyHomePage> {
       if (currentCalculation is double && currentCalculation % 1 == 0) {
         currentCalculation.toInt();
       }
-    });
+    }
+    buttonPressed = false;
+  }
+
+  void _addDecimal() {
+    //adds a decimal to the display but not the actual value yet.
+    currentCalculationSTR += ".";
+  }
+
+  void _performCalc(String desiredFunction) {
+    /*An issue with calculation occurs when you use the app as the it often
+    *confuses the previous and current calculations when you enter a value 
+    *and press button it performs a calculation when you do not want to
+    *perform one.*/
+    if (desiredFunction == "+") {
+      //addition function that adds the previous to the current calc
+      if (prevCalc == 0) {
+        prevCalc = currentCalculation;
+      } else {
+        if (curCalcChange) {
+          _performEquals();
+          if (buttonPressed) {
+            prevCalc += currentCalculation;
+            currentCalculationSTR = prevCalc.toString();
+          }
+        }
+      }
+      buttonPressed = true;
+      calcState = true;
+      curCalcChange = false;
+      prevFunction = "+";
+    } else if (desiredFunction == "-") {
+      //subtraction function that adds the previous to the current calc
+      if (prevCalc == 0) {
+        prevCalc = currentCalculation;
+      } else {
+        if (curCalcChange) {
+          _performEquals();
+          if (buttonPressed) {
+            prevCalc -= currentCalculation;
+            currentCalculationSTR = prevCalc.toString();
+          }
+        }
+      }
+      buttonPressed = true;
+      calcState = true;
+      curCalcChange = false;
+      prevFunction = "-";
+    } else if (desiredFunction == "x") {
+      //multiplication function that multiplies the previous to the current calc
+      if (prevCalc == 0) {
+        prevCalc = currentCalculation;
+      } else {
+        if (currentCalculation == 0 && prevCalc != 0) {
+          return;
+        } else {
+          if (curCalcChange) {
+            _performEquals();
+            if (buttonPressed) {
+              prevCalc *= currentCalculation;
+              currentCalculationSTR = prevCalc.toString();
+            }
+          }
+        }
+      }
+      buttonPressed = true;
+      calcState = true;
+      curCalcChange = false;
+      prevFunction = "x";
+    } else if (desiredFunction == "÷") {
+      //division isn't handled properly needs to be fixed
+      if (prevCalc == 0) {
+        prevCalc = currentCalculation;
+      } else {
+        if (curCalcChange) {
+          _performEquals();
+          if (buttonPressed) {
+            if (currentCalculation == 0) {
+              currentCalculationSTR = "Error";
+            } else {
+              prevCalc /= currentCalculation;
+              currentCalculationSTR = prevCalc.toString();
+            }
+          }
+        }
+      }
+      buttonPressed = true;
+      calcState = true;
+      curCalcChange = false;
+      prevFunction = "÷";
+    } else if (desiredFunction == "=") {
+      _performEquals();
+      curCalcChange = false;
+    }
+  }
+
+  void _performEquals() {
+//equals to fucntion this does the does function that was previously
+    //done
+    if (prevFunction == "+") {
+      prevCalc += currentCalculation;
+      currentCalculationSTR = prevCalc.toString();
+      calcState = true;
+      prevFunction = "+";
+    } else if (prevFunction == "-") {
+      prevCalc -= currentCalculation;
+      currentCalculationSTR = prevCalc.toString();
+      calcState = true;
+      prevFunction = "-";
+    } else if (prevFunction == "x") {
+      prevCalc *= currentCalculation;
+      currentCalculationSTR = prevCalc.toString();
+      calcState = true;
+      prevFunction = "x";
+    } else if (prevFunction == "÷") {
+      if (currentCalculation == 0) {
+        currentCalculationSTR = "Error";
+      } else {
+        prevCalc /= currentCalculation;
+        currentCalculationSTR = prevCalc.toString();
+        calcState = true;
+        prevFunction = "÷";
+      }
+    }
+    buttonPressed = false;
+  }
+
+  void _undo() {
+    if (currentCalculationSTR.isNotEmpty) {
+      currentCalculationSTR =
+          currentCalculationSTR.substring(0, currentCalculationSTR.length - 1);
+      if (currentCalculationSTR.isEmpty) {
+        currentCalculationSTR = "0";
+      }
+    } else {
+      currentCalculationSTR;
+    }
+    try {
+      currentCalculation = int.parse(currentCalculationSTR);
+    } catch (e) {
+      currentCalculation = double.parse(currentCalculationSTR);
+    }
+    if (currentCalculation is double && currentCalculation % 1 == 0) {
+      currentCalculation.toInt();
+    }
   }
 
   void _plusMinus() {
-    setState(() {
-      if (curCalcChange) {
-        if (currentCalculation != 0) {
-          currentCalculation *= -1;
-          currentCalculationSTR = currentCalculation.toString();
-        }
-      } else {
-        if (prevCalc != 0) {
-          prevCalc *= -1;
-          currentCalculationSTR = prevCalc.toString();
-        }
+    if (curCalcChange) {
+      if (currentCalculation != 0) {
+        currentCalculation *= -1;
+        currentCalculationSTR = currentCalculation.toString();
       }
-    });
+    } else {
+      if (prevCalc != 0) {
+        prevCalc *= -1;
+        currentCalculationSTR = prevCalc.toString();
+      }
+    }
   }
 
   @override
@@ -370,7 +345,11 @@ class _MyHomePageState extends State<MyHomePage> {
                           padding: const EdgeInsets.only(
                               left: 12, right: 12, top: 45),
                           child: ElevatedButton(
-                            onPressed: _ac,
+                            onPressed: () {
+                              setState(() {
+                                _ac();
+                              });
+                            },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: visualMode
                                   ? const Color.fromARGB(255, 40, 43, 51)
@@ -401,7 +380,11 @@ class _MyHomePageState extends State<MyHomePage> {
                               left: 12, right: 12, top: 45),
                           child: ElevatedButton(
                             //add function to +/-
-                            onPressed: _plusMinus,
+                            onPressed: () {
+                              setState(() {
+                                _plusMinus();
+                              });
+                            },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: visualMode
                                   ? const Color.fromARGB(255, 40, 43, 51)
@@ -433,7 +416,9 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: ElevatedButton(
                             //add function to %
                             onPressed: () {
-                              _percentage();
+                              setState(() {
+                                _percentage();
+                              });
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: visualMode
@@ -465,7 +450,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               left: 12, right: 12, top: 45),
                           child: ElevatedButton(
                             onPressed: () {
-                              _performCalc("÷");
+                              setState(() {
+                                _performCalc("÷");
+                              });
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: visualMode
@@ -504,7 +491,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               left: 12, right: 12, top: 45),
                           child: ElevatedButton(
                             onPressed: () {
-                              _addNumber("7");
+                              setState(() {
+                                _addNumber("7");
+                              });
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: visualMode
@@ -534,7 +523,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               left: 12, right: 12, top: 45),
                           child: ElevatedButton(
                             onPressed: () {
-                              _addNumber("8");
+                              setState(() {
+                                _addNumber("8");
+                              });
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: visualMode
@@ -564,7 +555,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               left: 12, right: 12, top: 45),
                           child: ElevatedButton(
                             onPressed: () {
-                              _addNumber("9");
+                              setState(() {
+                                _addNumber("9");
+                              });
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: visualMode
@@ -594,7 +587,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               left: 12, right: 12, top: 45),
                           child: ElevatedButton(
                             onPressed: () {
-                              _performCalc("x");
+                              setState(() {
+                                _performCalc("x");
+                              });
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: visualMode
@@ -633,7 +628,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               left: 12, right: 12, top: 45),
                           child: ElevatedButton(
                             onPressed: () {
-                              _addNumber("4");
+                              setState(() {
+                                _addNumber("4");
+                              });
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: visualMode
@@ -663,7 +660,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               left: 12, right: 12, top: 45),
                           child: ElevatedButton(
                             onPressed: () {
-                              _addNumber("5");
+                              setState(() {
+                                _addNumber("5");
+                              });
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: visualMode
@@ -693,7 +692,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               left: 12, right: 12, top: 45),
                           child: ElevatedButton(
                             onPressed: () {
-                              _addNumber("6");
+                              setState(() {
+                                _addNumber("6");
+                              });
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: visualMode
@@ -723,7 +724,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               left: 12, right: 12, top: 45),
                           child: ElevatedButton(
                             onPressed: () {
-                              _performCalc("-");
+                              setState(() {
+                                _performCalc("-");
+                              });
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: visualMode
@@ -762,7 +765,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               left: 12, right: 12, top: 45),
                           child: ElevatedButton(
                             onPressed: () {
-                              _addNumber("1");
+                              setState(() {
+                                _addNumber("1");
+                              });
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: visualMode
@@ -792,7 +797,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               left: 12, right: 12, top: 45),
                           child: ElevatedButton(
                             onPressed: () {
-                              _addNumber("2");
+                              setState(() {
+                                _addNumber("2");
+                              });
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: visualMode
@@ -822,7 +829,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               left: 12, right: 12, top: 45),
                           child: ElevatedButton(
                             onPressed: () {
-                              _addNumber("3");
+                              setState(() {
+                                _addNumber("3");
+                              });
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: visualMode
@@ -852,7 +861,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               left: 12, right: 12, top: 45),
                           child: ElevatedButton(
                             onPressed: () {
-                              _performCalc("+");
+                              setState(() {
+                                _performCalc("+");
+                              });
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: visualMode
@@ -891,7 +902,11 @@ class _MyHomePageState extends State<MyHomePage> {
                           padding: const EdgeInsets.only(
                               left: 12, right: 12, top: 45),
                           child: ElevatedButton(
-                            onPressed: _undo,
+                            onPressed: () {
+                              setState(() {
+                                _undo();
+                              });
+                            },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: visualMode
                                   ? const Color.fromARGB(255, 40, 43, 51)
@@ -918,7 +933,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               left: 12, right: 12, top: 45),
                           child: ElevatedButton(
                             onPressed: () {
-                              _addNumber("0");
+                              setState(() {
+                                _addNumber("0");
+                              });
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: visualMode
@@ -948,7 +965,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               left: 12, right: 12, top: 45),
                           child: ElevatedButton(
                             onPressed: () {
-                              _addDecimal();
+                              setState(() {
+                                _addDecimal();
+                              });
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: visualMode
@@ -978,7 +997,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               left: 12, right: 12, top: 45),
                           child: ElevatedButton(
                             onPressed: () {
-                              _performCalc("=");
+                              setState(() {
+                                _performCalc("=");
+                              });
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: visualMode
