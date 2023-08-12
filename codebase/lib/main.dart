@@ -321,7 +321,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height; //screen height
-    final desiredTop = screenHeight * 0.3; //63 percent of the screen
+    final desiredTop = screenHeight * 0.25; //63 percent of the screen
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -348,7 +348,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Align(
                   alignment: Alignment.bottomRight,
                   child: Padding(
-                    padding: const EdgeInsets.only(right: 20, bottom: 55),
+                    padding: const EdgeInsets.only(right: 20, bottom: 82),
                     child: Text(
                       currentCalculationSTR,
                       style: TextStyle(
@@ -368,7 +368,7 @@ class _MyHomePageState extends State<MyHomePage> {
               //try to play around to get the make the buttons respective
               //of each other and the container
               width: MediaQuery.of(context).size.width,
-              height: screenHeight / 0.7,
+              height: screenHeight / 0.75,
               decoration: BoxDecoration(
                   color: visualMode
                       ? const Color.fromARGB(255, 42, 45, 53)
