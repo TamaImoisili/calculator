@@ -73,23 +73,27 @@ class _MyHomePageState extends State<MyHomePage> {
     //Adjusts the AC button to clear and vice versa as inputs are entered
     if (clear == "C") {
       prevCalc = 0;
-      currentCalculationSTR = "0";
+      setState(() {
+        currentCalculationSTR = "0";
+      });
       currentCalculation = 0;
       clear = "AC";
     } else {
       prevCalc = 0;
-      currentCalculationSTR = "0";
+      setState(() {
+        currentCalculationSTR = "0";
+      });
       currentCalculation = 0;
     }
     buttonPressed = false;
-    setState(() {});
   }
 
   void _percentage() {
     currentCalculation = currentCalculation / 100;
-    currentCalculationSTR = currentCalculation.toString();
+    setState(() {
+      currentCalculationSTR = currentCalculation.toString();
+    });
     curCalcChange = false;
-    setState(() {});
   }
 
   void _addNumber(String num) {
@@ -98,7 +102,9 @@ class _MyHomePageState extends State<MyHomePage> {
     curCalcChange = true;
     if (calcState) {
       currentCalculationSTR = "";
-      currentCalculationSTR += num;
+      setState(() {
+        currentCalculationSTR += num;
+      });
       try {
         currentCalculation = int.parse(currentCalculationSTR);
       } catch (e) {
@@ -109,7 +115,9 @@ class _MyHomePageState extends State<MyHomePage> {
       if (currentCalculationSTR == "0") {
         currentCalculationSTR = "";
       }
-      currentCalculationSTR += num;
+      setState(() {
+        currentCalculationSTR += num;
+      });
 
       try {
         currentCalculation = int.parse(currentCalculationSTR);
@@ -121,13 +129,13 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     }
     buttonPressed = false;
-    setState(() {});
   }
 
   void _addDecimal() {
     //adds a decimal to the display but not the actual value yet.
-    currentCalculationSTR += ".";
-    setState(() {});
+    setState(() {
+      currentCalculationSTR += ".";
+    });
   }
 
   void _performCalc(String desiredFunction) {
@@ -144,7 +152,9 @@ class _MyHomePageState extends State<MyHomePage> {
           _performEquals();
           if (buttonPressed) {
             prevCalc += currentCalculation;
-            currentCalculationSTR = prevCalc.toString();
+            setState(() {
+              currentCalculationSTR = prevCalc.toString();
+            });
           }
         }
       }
@@ -161,7 +171,9 @@ class _MyHomePageState extends State<MyHomePage> {
           _performEquals();
           if (buttonPressed) {
             prevCalc -= currentCalculation;
-            currentCalculationSTR = prevCalc.toString();
+            setState(() {
+              currentCalculationSTR = prevCalc.toString();
+            });
           }
         }
       }
@@ -181,7 +193,9 @@ class _MyHomePageState extends State<MyHomePage> {
             _performEquals();
             if (buttonPressed) {
               prevCalc *= currentCalculation;
-              currentCalculationSTR = prevCalc.toString();
+              setState(() {
+                currentCalculationSTR = prevCalc.toString();
+              });
             }
           }
         }
@@ -199,10 +213,14 @@ class _MyHomePageState extends State<MyHomePage> {
           _performEquals();
           if (buttonPressed) {
             if (currentCalculation == 0) {
-              currentCalculationSTR = "Error";
+              setState(() {
+                currentCalculationSTR = "Error";
+              });
             } else {
               prevCalc /= currentCalculation;
-              currentCalculationSTR = prevCalc.toString();
+              setState(() {
+                currentCalculationSTR = prevCalc.toString();
+              });
             }
           }
         }
@@ -215,7 +233,6 @@ class _MyHomePageState extends State<MyHomePage> {
       _performEquals();
       curCalcChange = false;
     }
-    setState(() {});
   }
 
   void _performEquals() {
@@ -223,39 +240,52 @@ class _MyHomePageState extends State<MyHomePage> {
     //done
     if (prevFunction == "+") {
       prevCalc += currentCalculation;
-      currentCalculationSTR = prevCalc.toString();
+      setState(() {
+        currentCalculationSTR = prevCalc.toString();
+      });
       calcState = true;
       prevFunction = "+";
     } else if (prevFunction == "-") {
       prevCalc -= currentCalculation;
-      currentCalculationSTR = prevCalc.toString();
+      setState(() {
+        currentCalculationSTR = prevCalc.toString();
+      });
       calcState = true;
       prevFunction = "-";
     } else if (prevFunction == "x") {
       prevCalc *= currentCalculation;
-      currentCalculationSTR = prevCalc.toString();
+      setState(() {
+        currentCalculationSTR = prevCalc.toString();
+      });
       calcState = true;
       prevFunction = "x";
     } else if (prevFunction == "÷") {
       if (currentCalculation == 0) {
-        currentCalculationSTR = "Error";
+        setState(() {
+          currentCalculationSTR = "Error";
+        });
       } else {
         prevCalc /= currentCalculation;
-        currentCalculationSTR = prevCalc.toString();
+        setState(() {
+          currentCalculationSTR = prevCalc.toString();
+        });
         calcState = true;
         prevFunction = "÷";
       }
     }
     buttonPressed = false;
-    setState(() {});
   }
 
   void _undo() {
     if (currentCalculationSTR.isNotEmpty) {
-      currentCalculationSTR =
-          currentCalculationSTR.substring(0, currentCalculationSTR.length - 1);
+      setState(() {
+        currentCalculationSTR = currentCalculationSTR.substring(
+            0, currentCalculationSTR.length - 1);
+      });
       if (currentCalculationSTR.isEmpty) {
-        currentCalculationSTR = "0";
+        setState(() {
+          currentCalculationSTR = "0";
+        });
       }
     } else {
       currentCalculationSTR;
@@ -268,22 +298,24 @@ class _MyHomePageState extends State<MyHomePage> {
     if (currentCalculation is double && currentCalculation % 1 == 0) {
       currentCalculation.toInt();
     }
-    setState(() {});
   }
 
   void _plusMinus() {
     if (curCalcChange) {
       if (currentCalculation != 0) {
         currentCalculation *= -1;
-        currentCalculationSTR = currentCalculation.toString();
+        setState(() {
+          currentCalculationSTR = currentCalculation.toString();
+        });
       }
     } else {
       if (prevCalc != 0) {
         prevCalc *= -1;
-        currentCalculationSTR = prevCalc.toString();
+        setState(() {
+          currentCalculationSTR = prevCalc.toString();
+        });
       }
     }
-    setState(() {});
   }
 
   @override
@@ -1016,14 +1048,18 @@ class _MyHomePageState extends State<MyHomePage> {
                   IconButton(
                     icon: const Icon(Icons.wb_sunny),
                     onPressed: () {
-                      visualMode = false;
+                      setState(() {
+                        visualMode = false;
+                      });
                     },
                     color: visualMode ? Colors.grey : Colors.black,
                   ),
                   IconButton(
                     icon: const Icon(Icons.mode_night),
                     onPressed: () {
-                      visualMode = true;
+                      setState(() {
+                        visualMode = true;
+                      });
                     },
                     color: visualMode ? Colors.white : Colors.grey,
                   ),
