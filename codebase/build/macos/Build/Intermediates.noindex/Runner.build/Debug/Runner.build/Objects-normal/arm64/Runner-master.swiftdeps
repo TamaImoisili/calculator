@@ -1,8 +1,8 @@
 version: "Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)"
-options: "5dd1ea582840d66e7343a819e475b001945368be391191b2098f4f2c80786e4b"
-build_start_time: [1689140893, 920419000]
-build_end_time: [1689140898, 453423000]
+options: "0117b1894ba2e0d314f29ac72d635f68c56e007578ba3d94969c9e7b2845cba9"
+build_start_time: [1691815007, 552396000]
+build_end_time: [1691815007, 595780000]
 inputs:
-  "/Users/tamaimoisili/Github/calculator_app/macos/Flutter/GeneratedPluginRegistrant.swift": [1689140889, 864939318]
-  "/Users/tamaimoisili/Github/calculator_app/macos/Runner/AppDelegate.swift": [1686756961, 0]
-  "/Users/tamaimoisili/Github/calculator_app/macos/Runner/MainFlutterWindow.swift": [1686756961, 0]
+  "/Users/tamaimoisili/Github/calculator_app/macos/Flutter/GeneratedPluginRegistrant.swift": !private [1689141527, 535907797]
+  "/Users/tamaimoisili/Github/calculator_app/macos/Runner/AppDelegate.swift": !private [1686756961, 0]
+  "/Users/tamaimoisili/Github/calculator_app/macos/Runner/MainFlutterWindow.swift": !private [1686756961, 0]
