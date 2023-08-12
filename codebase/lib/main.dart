@@ -329,8 +329,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-        body: SafeArea(
-            child: Stack(
+        body: Stack(
       children: [
         Positioned(
           //position the top container above the bottom one so they
@@ -348,7 +347,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Align(
                   alignment: Alignment.bottomRight,
                   child: Padding(
-                    padding: const EdgeInsets.only(right: 20, bottom: 82),
+                    padding: const EdgeInsets.only(right: 20, bottom: 90),
                     child: Text(
                       currentCalculationSTR,
                       style: TextStyle(
@@ -384,7 +383,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         flex: 1,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 12, right: 12, top: 45),
+                              left: 5, right: 5, top: 20, bottom: 20),
                           child: ElevatedButton(
                             onPressed: () {
                               _ac();
@@ -397,7 +396,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 borderRadius: BorderRadius.circular(
                                     16), // Adjust border radius as needed
                               ),
-                              minimumSize: const Size(60, 60),
+                              minimumSize: const Size(80, 80),
                               padding: EdgeInsets.zero,
                             ),
                             child: Text(
@@ -406,7 +405,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 color: visualMode
                                     ? const Color.fromARGB(255, 110, 234, 188)
                                     : const Color.fromARGB(255, 100, 210, 178),
-                                fontSize: 25,
+                                fontSize: 30,
                               ),
                             ),
                           ),
@@ -416,7 +415,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         flex: 1,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 12, right: 12, top: 45),
+                              left: 5, right: 5, top: 20, bottom: 20),
                           child: ElevatedButton(
                             //add function to +/-
                             onPressed: () {
@@ -430,7 +429,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 borderRadius: BorderRadius.circular(
                                     16), // Adjust border radius as needed
                               ),
-                              minimumSize: const Size(60, 60),
+                              minimumSize: const Size(80, 80),
                               padding: EdgeInsets.zero,
                             ),
                             child: Text(
@@ -439,7 +438,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 color: visualMode
                                     ? const Color.fromARGB(255, 110, 234, 188)
                                     : const Color.fromARGB(255, 100, 210, 178),
-                                fontSize: 25,
+                                fontSize: 30,
                               ),
                             ),
                           ),
@@ -449,7 +448,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         flex: 1,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 12, right: 12, top: 45),
+                              left: 5, right: 5, top: 20, bottom: 20),
                           child: ElevatedButton(
                             //add function to %
                             onPressed: () {
@@ -463,7 +462,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 borderRadius: BorderRadius.circular(
                                     16), // Adjust border radius as needed
                               ),
-                              minimumSize: const Size(60, 60),
+                              minimumSize: const Size(80, 80),
                               padding: EdgeInsets.zero,
                             ),
                             child: Text(
@@ -472,7 +471,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 color: visualMode
                                     ? const Color.fromARGB(255, 110, 234, 188)
                                     : const Color.fromARGB(255, 100, 210, 178),
-                                fontSize: 25,
+                                fontSize: 30,
                               ),
                             ),
                           ),
@@ -482,7 +481,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         flex: 1,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 12, right: 12, top: 45),
+                              left: 5, right: 5, top: 20, bottom: 20),
                           child: ElevatedButton(
                             onPressed: () {
                               _performCalc("÷");
@@ -495,7 +494,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 borderRadius: BorderRadius.circular(
                                     16), // Adjust border radius as needed
                               ),
-                              minimumSize: const Size(60, 60),
+                              minimumSize: const Size(80, 80),
                               padding: EdgeInsets.zero,
                             ),
                             child: Text(
@@ -504,7 +503,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 color: visualMode
                                     ? const Color.fromARGB(255, 190, 110, 110)
                                     : const Color.fromARGB(255, 255, 100, 100),
-                                fontSize: 25,
+                                fontSize: 30,
                               ),
                             ),
                           ),
@@ -521,7 +520,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         flex: 1,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 12, right: 12, top: 45),
+                              left: 5, right: 5, top: 20, bottom: 20),
                           child: ElevatedButton(
                             onPressed: () {
                               _addNumber("7");
@@ -534,14 +533,14 @@ class _MyHomePageState extends State<MyHomePage> {
                                 borderRadius: BorderRadius.circular(
                                     16), // Adjust border radius as needed
                               ),
-                              minimumSize: const Size(60, 60),
+                              minimumSize: const Size(80, 80),
                               padding: EdgeInsets.zero,
                             ),
                             child: Text(
                               '7',
                               style: TextStyle(
                                 color: visualMode ? Colors.white : Colors.black,
-                                fontSize: 25,
+                                fontSize: 30,
                               ),
                             ),
                           ),
@@ -551,7 +550,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         flex: 1,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 12, right: 12, top: 45),
+                              left: 5, right: 5, top: 20, bottom: 20),
                           child: ElevatedButton(
                             onPressed: () {
                               _addNumber("8");
@@ -564,14 +563,14 @@ class _MyHomePageState extends State<MyHomePage> {
                                 borderRadius: BorderRadius.circular(
                                     16), // Adjust border radius as needed
                               ),
-                              minimumSize: const Size(60, 60),
+                              minimumSize: const Size(80, 80),
                               padding: EdgeInsets.zero,
                             ),
                             child: Text(
                               '8',
                               style: TextStyle(
                                 color: visualMode ? Colors.white : Colors.black,
-                                fontSize: 25,
+                                fontSize: 30,
                               ),
                             ),
                           ),
@@ -581,7 +580,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         flex: 1,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 12, right: 12, top: 45),
+                              left: 5, right: 5, top: 20, bottom: 20),
                           child: ElevatedButton(
                             onPressed: () {
                               _addNumber("9");
@@ -594,14 +593,14 @@ class _MyHomePageState extends State<MyHomePage> {
                                 borderRadius: BorderRadius.circular(
                                     16), // Adjust border radius as needed
                               ),
-                              minimumSize: const Size(60, 60),
+                              minimumSize: const Size(80, 80),
                               padding: EdgeInsets.zero,
                             ),
                             child: Text(
                               '9',
                               style: TextStyle(
                                 color: visualMode ? Colors.white : Colors.black,
-                                fontSize: 25,
+                                fontSize: 30,
                               ),
                             ),
                           ),
@@ -611,7 +610,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         flex: 1,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 12, right: 12, top: 45),
+                              left: 5, right: 5, top: 20, bottom: 20),
                           child: ElevatedButton(
                             onPressed: () {
                               _performCalc("x");
@@ -624,7 +623,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 borderRadius: BorderRadius.circular(
                                     16), // Adjust border radius as needed
                               ),
-                              minimumSize: const Size(60, 60),
+                              minimumSize: const Size(80, 80),
                               padding: EdgeInsets.zero,
                             ),
                             child: Text(
@@ -633,7 +632,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 color: visualMode
                                     ? const Color.fromARGB(255, 190, 110, 110)
                                     : const Color.fromARGB(255, 255, 100, 100),
-                                fontSize: 25,
+                                fontSize: 30,
                               ),
                             ),
                           ),
@@ -650,7 +649,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         flex: 1,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 12, right: 12, top: 45),
+                              left: 5, right: 5, top: 20, bottom: 20),
                           child: ElevatedButton(
                             onPressed: () {
                               _addNumber("4");
@@ -663,14 +662,14 @@ class _MyHomePageState extends State<MyHomePage> {
                                 borderRadius: BorderRadius.circular(
                                     16), // Adjust border radius as needed
                               ),
-                              minimumSize: const Size(60, 60),
+                              minimumSize: const Size(80, 80),
                               padding: EdgeInsets.zero,
                             ),
                             child: Text(
                               '4',
                               style: TextStyle(
                                 color: visualMode ? Colors.white : Colors.black,
-                                fontSize: 25,
+                                fontSize: 30,
                               ),
                             ),
                           ),
@@ -680,7 +679,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         flex: 1,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 12, right: 12, top: 45),
+                              left: 5, right: 5, top: 20, bottom: 20),
                           child: ElevatedButton(
                             onPressed: () {
                               _addNumber("5");
@@ -693,14 +692,14 @@ class _MyHomePageState extends State<MyHomePage> {
                                 borderRadius: BorderRadius.circular(
                                     16), // Adjust border radius as needed
                               ),
-                              minimumSize: const Size(60, 60),
+                              minimumSize: const Size(80, 80),
                               padding: EdgeInsets.zero,
                             ),
                             child: Text(
                               '5',
                               style: TextStyle(
                                 color: visualMode ? Colors.white : Colors.black,
-                                fontSize: 25,
+                                fontSize: 30,
                               ),
                             ),
                           ),
@@ -710,7 +709,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         flex: 1,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 12, right: 12, top: 45),
+                              left: 5, right: 5, top: 20, bottom: 20),
                           child: ElevatedButton(
                             onPressed: () {
                               _addNumber("6");
@@ -723,14 +722,14 @@ class _MyHomePageState extends State<MyHomePage> {
                                 borderRadius: BorderRadius.circular(
                                     16), // Adjust border radius as needed
                               ),
-                              minimumSize: const Size(60, 60),
+                              minimumSize: const Size(80, 80),
                               padding: EdgeInsets.zero,
                             ),
                             child: Text(
                               '6',
                               style: TextStyle(
                                 color: visualMode ? Colors.white : Colors.black,
-                                fontSize: 25,
+                                fontSize: 30,
                               ),
                             ),
                           ),
@@ -740,7 +739,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         flex: 1,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 12, right: 12, top: 45),
+                              left: 5, right: 5, top: 20, bottom: 20),
                           child: ElevatedButton(
                             onPressed: () {
                               _performCalc("-");
@@ -753,7 +752,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 borderRadius: BorderRadius.circular(
                                     16), // Adjust border radius as needed
                               ),
-                              minimumSize: const Size(60, 60),
+                              minimumSize: const Size(80, 80),
                               padding: EdgeInsets.zero,
                             ),
                             child: Text(
@@ -762,7 +761,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 color: visualMode
                                     ? const Color.fromARGB(255, 190, 110, 110)
                                     : const Color.fromARGB(255, 255, 100, 100),
-                                fontSize: 25,
+                                fontSize: 30,
                               ),
                             ),
                           ),
@@ -779,7 +778,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         flex: 1,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 12, right: 12, top: 45),
+                              left: 5, right: 5, top: 20, bottom: 20),
                           child: ElevatedButton(
                             onPressed: () {
                               _addNumber("1");
@@ -792,14 +791,14 @@ class _MyHomePageState extends State<MyHomePage> {
                                 borderRadius: BorderRadius.circular(
                                     16), // Adjust border radius as needed
                               ),
-                              minimumSize: const Size(60, 60),
+                              minimumSize: const Size(80, 80),
                               padding: EdgeInsets.zero,
                             ),
                             child: Text(
                               '1',
                               style: TextStyle(
                                 color: visualMode ? Colors.white : Colors.black,
-                                fontSize: 25,
+                                fontSize: 30,
                               ),
                             ),
                           ),
@@ -809,7 +808,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         flex: 1,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 12, right: 12, top: 45),
+                              left: 5, right: 5, top: 20, bottom: 20),
                           child: ElevatedButton(
                             onPressed: () {
                               _addNumber("2");
@@ -822,14 +821,14 @@ class _MyHomePageState extends State<MyHomePage> {
                                 borderRadius: BorderRadius.circular(
                                     16), // Adjust border radius as needed
                               ),
-                              minimumSize: const Size(60, 60),
+                              minimumSize: const Size(80, 80),
                               padding: EdgeInsets.zero,
                             ),
                             child: Text(
                               '2',
                               style: TextStyle(
                                 color: visualMode ? Colors.white : Colors.black,
-                                fontSize: 25,
+                                fontSize: 30,
                               ),
                             ),
                           ),
@@ -839,7 +838,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         flex: 1,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 12, right: 12, top: 45),
+                              left: 5, right: 5, top: 20, bottom: 20),
                           child: ElevatedButton(
                             onPressed: () {
                               _addNumber("3");
@@ -852,14 +851,14 @@ class _MyHomePageState extends State<MyHomePage> {
                                 borderRadius: BorderRadius.circular(
                                     16), // Adjust border radius as needed
                               ),
-                              minimumSize: const Size(60, 60),
+                              minimumSize: const Size(80, 80),
                               padding: EdgeInsets.zero,
                             ),
                             child: Text(
                               '3',
                               style: TextStyle(
                                 color: visualMode ? Colors.white : Colors.black,
-                                fontSize: 25,
+                                fontSize: 30,
                               ),
                             ),
                           ),
@@ -869,7 +868,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         flex: 1,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 12, right: 12, top: 45),
+                              left: 5, right: 5, top: 20, bottom: 20),
                           child: ElevatedButton(
                             onPressed: () {
                               _performCalc("+");
@@ -882,7 +881,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 borderRadius: BorderRadius.circular(
                                     16), // Adjust border radius as needed
                               ),
-                              minimumSize: const Size(60, 60),
+                              minimumSize: const Size(80, 80),
                               padding: EdgeInsets.zero,
                             ),
                             child: Text(
@@ -891,7 +890,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 color: visualMode
                                     ? const Color.fromARGB(255, 190, 110, 110)
                                     : const Color.fromARGB(255, 255, 100, 100),
-                                fontSize: 25,
+                                fontSize: 30,
                               ),
                             ),
                           ),
@@ -909,7 +908,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: Padding(
                           //add function to the undo
                           padding: const EdgeInsets.only(
-                              left: 12, right: 12, top: 45),
+                              left: 5, right: 5, top: 20, bottom: 20),
                           child: ElevatedButton(
                             onPressed: () {
                               _undo();
@@ -922,7 +921,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 borderRadius: BorderRadius.circular(
                                     16), // Adjust border radius as needed
                               ),
-                              minimumSize: const Size(60, 60),
+                              minimumSize: const Size(80, 80),
                               padding: EdgeInsets.zero,
                             ),
                             child: Icon(
@@ -937,7 +936,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         flex: 1,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 12, right: 12, top: 45),
+                              left: 5, right: 5, top: 20, bottom: 20),
                           child: ElevatedButton(
                             onPressed: () {
                               _addNumber("0");
@@ -950,14 +949,14 @@ class _MyHomePageState extends State<MyHomePage> {
                                 borderRadius: BorderRadius.circular(
                                     16), // Adjust border radius as needed
                               ),
-                              minimumSize: const Size(60, 60),
+                              minimumSize: const Size(80, 80),
                               padding: EdgeInsets.zero,
                             ),
                             child: Text(
                               '0',
                               style: TextStyle(
                                 color: visualMode ? Colors.white : Colors.black,
-                                fontSize: 25,
+                                fontSize: 30,
                               ),
                             ),
                           ),
@@ -967,7 +966,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         flex: 1,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 12, right: 12, top: 45),
+                              left: 5, right: 5, top: 20, bottom: 20),
                           child: ElevatedButton(
                             onPressed: () {
                               _addDecimal();
@@ -980,14 +979,14 @@ class _MyHomePageState extends State<MyHomePage> {
                                 borderRadius: BorderRadius.circular(
                                     16), // Adjust border radius as needed
                               ),
-                              minimumSize: const Size(60, 60),
+                              minimumSize: const Size(80, 80),
                               padding: EdgeInsets.zero,
                             ),
                             child: Text(
                               '.',
                               style: TextStyle(
                                 color: visualMode ? Colors.white : Colors.black,
-                                fontSize: 25,
+                                fontSize: 30,
                               ),
                             ),
                           ),
@@ -997,7 +996,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         flex: 1,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 12, right: 12, top: 45),
+                              left: 5, right: 5, top: 20, bottom: 20),
                           child: ElevatedButton(
                             onPressed: () {
                               _performCalc("=");
@@ -1010,7 +1009,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 borderRadius: BorderRadius.circular(
                                     16), // Adjust border radius as needed
                               ),
-                              minimumSize: const Size(60, 60),
+                              minimumSize: const Size(80, 80),
                               padding: EdgeInsets.zero,
                             ),
                             child: Text(
@@ -1019,7 +1018,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 color: visualMode
                                     ? const Color.fromARGB(255, 190, 110, 110)
                                     : const Color.fromARGB(255, 255, 100, 100),
-                                fontSize: 25,
+                                fontSize: 30,
                               ),
                             ),
                           ),
@@ -1032,7 +1031,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             )),
         Positioned(
-            top: 50,
+            top: 40,
             left: MediaQuery.of(context).size.width / 2.7,
             right: MediaQuery.of(context).size.width / 2.7,
             child: Container(
@@ -1068,6 +1067,6 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             )),
       ],
-    )));
+    ));
   }
 }
