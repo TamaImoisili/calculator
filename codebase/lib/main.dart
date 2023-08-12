@@ -82,12 +82,14 @@ class _MyHomePageState extends State<MyHomePage> {
       currentCalculation = 0;
     }
     buttonPressed = false;
+    setState(() {});
   }
 
   void _percentage() {
     currentCalculation = currentCalculation / 100;
     currentCalculationSTR = currentCalculation.toString();
     curCalcChange = false;
+    setState(() {});
   }
 
   void _addNumber(String num) {
@@ -119,11 +121,13 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     }
     buttonPressed = false;
+    setState(() {});
   }
 
   void _addDecimal() {
     //adds a decimal to the display but not the actual value yet.
     currentCalculationSTR += ".";
+    setState(() {});
   }
 
   void _performCalc(String desiredFunction) {
@@ -211,6 +215,7 @@ class _MyHomePageState extends State<MyHomePage> {
       _performEquals();
       curCalcChange = false;
     }
+    setState(() {});
   }
 
   void _performEquals() {
@@ -242,6 +247,7 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     }
     buttonPressed = false;
+    setState(() {});
   }
 
   void _undo() {
@@ -262,6 +268,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if (currentCalculation is double && currentCalculation % 1 == 0) {
       currentCalculation.toInt();
     }
+    setState(() {});
   }
 
   void _plusMinus() {
@@ -276,6 +283,7 @@ class _MyHomePageState extends State<MyHomePage> {
         currentCalculationSTR = prevCalc.toString();
       }
     }
+    setState(() {});
   }
 
   @override
@@ -346,9 +354,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               left: 12, right: 12, top: 45),
                           child: ElevatedButton(
                             onPressed: () {
-                              setState(() {
-                                _ac();
-                              });
+                              _ac();
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: visualMode
@@ -381,9 +387,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: ElevatedButton(
                             //add function to +/-
                             onPressed: () {
-                              setState(() {
-                                _plusMinus();
-                              });
+                              _plusMinus();
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: visualMode
@@ -416,9 +420,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: ElevatedButton(
                             //add function to %
                             onPressed: () {
-                              setState(() {
-                                _percentage();
-                              });
+                              _percentage();
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: visualMode
@@ -450,9 +452,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               left: 12, right: 12, top: 45),
                           child: ElevatedButton(
                             onPressed: () {
-                              setState(() {
-                                _performCalc("÷");
-                              });
+                              _performCalc("÷");
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: visualMode
@@ -491,9 +491,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               left: 12, right: 12, top: 45),
                           child: ElevatedButton(
                             onPressed: () {
-                              setState(() {
-                                _addNumber("7");
-                              });
+                              _addNumber("7");
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: visualMode
@@ -523,9 +521,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               left: 12, right: 12, top: 45),
                           child: ElevatedButton(
                             onPressed: () {
-                              setState(() {
-                                _addNumber("8");
-                              });
+                              _addNumber("8");
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: visualMode
@@ -555,9 +551,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               left: 12, right: 12, top: 45),
                           child: ElevatedButton(
                             onPressed: () {
-                              setState(() {
-                                _addNumber("9");
-                              });
+                              _addNumber("9");
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: visualMode
@@ -587,9 +581,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               left: 12, right: 12, top: 45),
                           child: ElevatedButton(
                             onPressed: () {
-                              setState(() {
-                                _performCalc("x");
-                              });
+                              _performCalc("x");
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: visualMode
@@ -628,9 +620,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               left: 12, right: 12, top: 45),
                           child: ElevatedButton(
                             onPressed: () {
-                              setState(() {
-                                _addNumber("4");
-                              });
+                              _addNumber("4");
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: visualMode
@@ -660,9 +650,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               left: 12, right: 12, top: 45),
                           child: ElevatedButton(
                             onPressed: () {
-                              setState(() {
-                                _addNumber("5");
-                              });
+                              _addNumber("5");
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: visualMode
@@ -692,9 +680,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               left: 12, right: 12, top: 45),
                           child: ElevatedButton(
                             onPressed: () {
-                              setState(() {
-                                _addNumber("6");
-                              });
+                              _addNumber("6");
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: visualMode
@@ -724,9 +710,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               left: 12, right: 12, top: 45),
                           child: ElevatedButton(
                             onPressed: () {
-                              setState(() {
-                                _performCalc("-");
-                              });
+                              _performCalc("-");
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: visualMode
@@ -765,9 +749,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               left: 12, right: 12, top: 45),
                           child: ElevatedButton(
                             onPressed: () {
-                              setState(() {
-                                _addNumber("1");
-                              });
+                              _addNumber("1");
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: visualMode
@@ -797,9 +779,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               left: 12, right: 12, top: 45),
                           child: ElevatedButton(
                             onPressed: () {
-                              setState(() {
-                                _addNumber("2");
-                              });
+                              _addNumber("2");
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: visualMode
@@ -829,9 +809,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               left: 12, right: 12, top: 45),
                           child: ElevatedButton(
                             onPressed: () {
-                              setState(() {
-                                _addNumber("3");
-                              });
+                              _addNumber("3");
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: visualMode
@@ -861,9 +839,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               left: 12, right: 12, top: 45),
                           child: ElevatedButton(
                             onPressed: () {
-                              setState(() {
-                                _performCalc("+");
-                              });
+                              _performCalc("+");
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: visualMode
@@ -903,9 +879,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               left: 12, right: 12, top: 45),
                           child: ElevatedButton(
                             onPressed: () {
-                              setState(() {
-                                _undo();
-                              });
+                              _undo();
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: visualMode
@@ -933,9 +907,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               left: 12, right: 12, top: 45),
                           child: ElevatedButton(
                             onPressed: () {
-                              setState(() {
-                                _addNumber("0");
-                              });
+                              _addNumber("0");
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: visualMode
@@ -965,9 +937,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               left: 12, right: 12, top: 45),
                           child: ElevatedButton(
                             onPressed: () {
-                              setState(() {
-                                _addDecimal();
-                              });
+                              _addDecimal();
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: visualMode
@@ -997,9 +967,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               left: 12, right: 12, top: 45),
                           child: ElevatedButton(
                             onPressed: () {
-                              setState(() {
-                                _performCalc("=");
-                              });
+                              _performCalc("=");
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: visualMode
@@ -1048,18 +1016,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   IconButton(
                     icon: const Icon(Icons.wb_sunny),
                     onPressed: () {
-                      setState(() {
-                        visualMode = false;
-                      });
+                      visualMode = false;
                     },
                     color: visualMode ? Colors.grey : Colors.black,
                   ),
                   IconButton(
                     icon: const Icon(Icons.mode_night),
                     onPressed: () {
-                      setState(() {
-                        visualMode = true;
-                      });
+                      visualMode = true;
                     },
                     color: visualMode ? Colors.white : Colors.grey,
                   ),
