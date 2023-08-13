@@ -383,7 +383,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         flex: 1,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 5, right: 5, top: 20, bottom: 20),
+                              left: 5, right: 5, top: 13, bottom: 30),
                           child: ElevatedButton(
                             onPressed: () {
                               _ac();
@@ -415,7 +415,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         flex: 1,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 5, right: 5, top: 20, bottom: 20),
+                              left: 5, right: 5, top: 13, bottom: 30),
                           child: ElevatedButton(
                             //add function to +/-
                             onPressed: () {
@@ -448,7 +448,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         flex: 1,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 5, right: 5, top: 20, bottom: 20),
+                              left: 5, right: 5, top: 13, bottom: 30),
                           child: ElevatedButton(
                             //add function to %
                             onPressed: () {
@@ -481,7 +481,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         flex: 1,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 5, right: 5, top: 20, bottom: 20),
+                              left: 5, right: 5, top: 13, bottom: 30),
                           child: ElevatedButton(
                             onPressed: () {
                               _performCalc("÷");
@@ -520,7 +520,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         flex: 1,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 5, right: 5, top: 20, bottom: 20),
+                              left: 5, right: 5, top: 13, bottom: 30),
                           child: ElevatedButton(
                             onPressed: () {
                               _addNumber("7");
@@ -550,7 +550,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         flex: 1,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 5, right: 5, top: 20, bottom: 20),
+                              left: 5, right: 5, top: 13, bottom: 30),
                           child: ElevatedButton(
                             onPressed: () {
                               _addNumber("8");
@@ -580,7 +580,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         flex: 1,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 5, right: 5, top: 20, bottom: 20),
+                              left: 5, right: 5, top: 13, bottom: 30),
                           child: ElevatedButton(
                             onPressed: () {
                               _addNumber("9");
@@ -610,7 +610,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         flex: 1,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 5, right: 5, top: 20, bottom: 20),
+                              left: 5, right: 5, top: 13, bottom: 30),
                           child: ElevatedButton(
                             onPressed: () {
                               _performCalc("x");
@@ -649,7 +649,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         flex: 1,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 5, right: 5, top: 20, bottom: 20),
+                              left: 5, right: 5, top: 13, bottom: 30),
                           child: ElevatedButton(
                             onPressed: () {
                               _addNumber("4");
@@ -679,7 +679,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         flex: 1,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 5, right: 5, top: 20, bottom: 20),
+                              left: 5, right: 5, top: 13, bottom: 30),
                           child: ElevatedButton(
                             onPressed: () {
                               _addNumber("5");
@@ -709,7 +709,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         flex: 1,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 5, right: 5, top: 20, bottom: 20),
+                              left: 5, right: 5, top: 13, bottom: 30),
                           child: ElevatedButton(
                             onPressed: () {
                               _addNumber("6");
@@ -739,7 +739,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         flex: 1,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 5, right: 5, top: 20, bottom: 20),
+                              left: 5, right: 5, top: 13, bottom: 30),
                           child: ElevatedButton(
                             onPressed: () {
                               _performCalc("-");
@@ -778,7 +778,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         flex: 1,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 5, right: 5, top: 20, bottom: 20),
+                              left: 5, right: 5, top: 13, bottom: 30),
                           child: ElevatedButton(
                             onPressed: () {
                               _addNumber("1");
@@ -808,7 +808,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         flex: 1,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 5, right: 5, top: 20, bottom: 20),
+                              left: 5, right: 5, top: 13, bottom: 30),
                           child: ElevatedButton(
                             onPressed: () {
                               _addNumber("2");
@@ -838,7 +838,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         flex: 1,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 5, right: 5, top: 20, bottom: 20),
+                              left: 5, right: 5, top: 13, bottom: 30),
                           child: ElevatedButton(
                             onPressed: () {
                               _addNumber("3");
@@ -868,7 +868,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         flex: 1,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 5, right: 5, top: 20, bottom: 20),
+                              left: 5, right: 5, top: 13, bottom: 30),
                           child: ElevatedButton(
                             onPressed: () {
                               _performCalc("+");
@@ -908,7 +908,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: Padding(
                           //add function to the undo
                           padding: const EdgeInsets.only(
-                              left: 5, right: 5, top: 20, bottom: 20),
+                              left: 5, right: 5, top: 13, bottom: 80),
                           child: ElevatedButton(
                             onPressed: () {
                               _undo();
@@ -936,7 +936,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         flex: 1,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 5, right: 5, top: 20, bottom: 20),
+                              left: 5, right: 5, top: 13, bottom: 80),
                           child: ElevatedButton(
                             onPressed: () {
                               _addNumber("0");
@@ -966,7 +966,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         flex: 1,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 5, right: 5, top: 20, bottom: 20),
+                              left: 5, right: 5, top: 13, bottom: 80),
                           child: ElevatedButton(
                             onPressed: () {
                               _addDecimal();
@@ -996,7 +996,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         flex: 1,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 5, right: 5, top: 20, bottom: 20),
+                              left: 5, right: 5, top: 13, bottom: 80),
                           child: ElevatedButton(
                             onPressed: () {
                               _performCalc("=");
