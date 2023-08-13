@@ -339,7 +339,7 @@ class _MyHomePageState extends State<MyHomePage> {
               final double width = constraints.maxWidth;
               final desiredTop = height * 0.3; //63 percent of the screen
               final double paddingFor_5 = width * 0.00331;
-              final double paddingFor_20_w = width * 0.0133;
+              final double paddingfor20W = width * 0.0133;
               final double paddingFor_20 = height * 0.0233;
               final double paddingFor_45 = height * 0.0525;
               final double minWidth = width * 0.053; // Set your minimum width
@@ -367,8 +367,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             alignment: Alignment.bottomRight,
                             child: Padding(
                               padding: EdgeInsets.only(
-                                  right: paddingFor_20_w,
-                                  bottom: paddingFor_45),
+                                  right: paddingfor20W, bottom: paddingFor_45),
                               child: Text(
                                 currentCalculationSTR,
                                 style: TextStyle(
