@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'calculator_engine.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -55,263 +57,27 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String currentCalculationSTR = "0";
-  num currentCalculation = 0; //I am using nums as I need to switch back and
-  //forth between decimals and integers.
-  num prevCalc = 0; //Same thing here
-  bool calcState =
-      false; // This determines the calculation state, I forget the function
-  bool curCalcChange = false; // used to determine when user inputs a new value
-  //to change the current calculation.
-  bool decimalStillLastDigit = true;
-  String clear = "AC";
-  String prevFunction = "";
+  final CalculatorEngine _engine = CalculatorEngine();
   bool visualMode = true;
-  bool buttonPressed = false;
-  bool justEvaluated = false;
-  String lastFunction = "";
-  num lastOperand = 0;
 
-  void _ac() {
-    //Adjusts the AC button to clear and vice versa as inputs are entered
-    if (clear == "C") {
-      prevCalc = 0;
-      setState(() {
-        currentCalculationSTR = "0";
-      });
-      currentCalculation = 0;
-      prevFunction = "";
-      justEvaluated = false;
-      clear = "AC";
-    } else {
-      prevCalc = 0;
-      setState(() {
-        currentCalculationSTR = "0";
-      });
-      currentCalculation = 0;
-      prevFunction = "";
-      justEvaluated = false;
-    }
-    buttonPressed = false;
-    curCalcChange = false;
-    calcState = false;
+  void _runEngine(void Function() action) {
+    setState(action);
   }
 
-  void _percentage() {
-    if (currentCalculationSTR == "Error") {
-      return;
-    }
-    currentCalculation = currentCalculation / 100;
-    setState(() {
-      currentCalculationSTR = currentCalculation.toString();
-    });
-    curCalcChange = true;
-  }
+  void _ac() => _runEngine(_engine.ac);
 
-  void _addNumber(String num) {
-    // adds a number to the current value
-    clear = "C";
-    if (currentCalculationSTR == "Error") {
-      _ac();
-    }
-    if (calcState || justEvaluated) {
-      currentCalculationSTR = "0";
-      justEvaluated = false;
-    }
-    curCalcChange = true;
-    if (calcState) {
-      currentCalculationSTR = "";
-      setState(() {
-        currentCalculationSTR += num;
-      });
-      try {
-        currentCalculation = int.parse(currentCalculationSTR);
-      } catch (e) {
-        currentCalculation = double.parse(currentCalculationSTR);
-      }
-      calcState = false;
-    } else {
-      if (currentCalculationSTR == "0") {
-        currentCalculationSTR = "";
-      }
-      setState(() {
-        currentCalculationSTR += num;
-      });
+  void _percentage() => _runEngine(_engine.percentage);
 
-      try {
-        currentCalculation = int.parse(currentCalculationSTR);
-      } catch (e) {
-        currentCalculation = double.parse(currentCalculationSTR);
-      }
-      if (currentCalculation is double && currentCalculation % 1 == 0) {
-        currentCalculation.toInt();
-      }
-    }
-    buttonPressed = false;
-    calcState = false;
-  }
+  void _addNumber(String digit) => _runEngine(() => _engine.addNumber(digit));
 
-  void _addDecimal() {
-    //adds a decimal to the display but not the actual value yet.
-    if (currentCalculationSTR == "Error") {
-      _ac();
-    }
-    if (calcState || justEvaluated) {
-      currentCalculationSTR = "0";
-      calcState = false;
-      justEvaluated = false;
-    }
-    if (!currentCalculationSTR.contains(".")) {
-      setState(() {
-        currentCalculationSTR += ".";
-      });
-    }
-    try {
-      currentCalculation = double.parse(currentCalculationSTR);
-    } catch (e) {
-      // Ignore parse errors for partial input like "-".
-    }
-    clear = "C";
-    curCalcChange = true;
-  }
+  void _addDecimal() => _runEngine(_engine.addDecimal);
 
-  void _performCalc(String desiredFunction) {
-    /*An issue with calculation occurs when you use the app as the it often
-    *confuses the previous and current calculations when you enter a value 
-    *and press button it performs a calculation when you do not want to
-    *perform one.*/
-    if (currentCalculationSTR == "Error") {
-      return;
-    }
-    if (desiredFunction == "=") {
-      _performEquals();
-      curCalcChange = false;
-      return;
-    }
+  void _performCalc(String desiredFunction) =>
+      _runEngine(() => _engine.performCalc(desiredFunction));
 
-    if (prevFunction.isNotEmpty && curCalcChange) {
-      _performEquals();
-    } else if (prevFunction.isEmpty) {
-      prevCalc = currentCalculation;
-    }
+  void _undo() => _runEngine(_engine.undo);
 
-    prevFunction = desiredFunction;
-    buttonPressed = true;
-    calcState = true;
-    curCalcChange = false;
-    justEvaluated = false;
-  }
-
-  void _performEquals() {
-//equals to fucntion this does the does function that was previously
-    //done
-    if (currentCalculationSTR == "Error") {
-      return;
-    }
-    if (prevFunction.isEmpty && justEvaluated && lastFunction.isNotEmpty) {
-      prevFunction = lastFunction;
-      currentCalculation = lastOperand;
-    }
-    if (prevFunction.isEmpty) {
-      return;
-    }
-    if (prevFunction == "+") {
-      prevCalc += currentCalculation;
-      setState(() {
-        currentCalculationSTR = prevCalc.toString();
-      });
-      calcState = true;
-      prevFunction = "+";
-    } else if (prevFunction == "-") {
-      prevCalc -= currentCalculation;
-      setState(() {
-        currentCalculationSTR = prevCalc.toString();
-      });
-      calcState = true;
-      prevFunction = "-";
-    } else if (prevFunction == "x") {
-      prevCalc *= currentCalculation;
-      setState(() {
-        currentCalculationSTR = prevCalc.toString();
-      });
-      calcState = true;
-      prevFunction = "x";
-    } else if (prevFunction == "÷") {
-      if (currentCalculation == 0) {
-        setState(() {
-          currentCalculationSTR = "Error";
-        });
-      } else {
-        prevCalc /= currentCalculation;
-        setState(() {
-          currentCalculationSTR = prevCalc.toString();
-        });
-        calcState = true;
-        prevFunction = "÷";
-      }
-    }
-    if (currentCalculationSTR != "Error") {
-      lastFunction = prevFunction;
-      lastOperand = currentCalculation;
-    }
-    currentCalculation = prevCalc;
-    prevFunction = "";
-    buttonPressed = false;
-    justEvaluated = true;
-  }
-
-  void _undo() {
-    if (currentCalculationSTR == "Error") {
-      _ac();
-      return;
-    }
-    if (currentCalculationSTR.isNotEmpty) {
-      setState(() {
-        currentCalculationSTR = currentCalculationSTR.substring(
-            0, currentCalculationSTR.length - 1);
-      });
-      if (currentCalculationSTR.isEmpty) {
-        setState(() {
-          currentCalculationSTR = "0";
-        });
-      }
-    } else {
-      currentCalculationSTR;
-    }
-    try {
-      currentCalculation = int.parse(currentCalculationSTR);
-    } catch (e) {
-      try {
-        currentCalculation = double.parse(currentCalculationSTR);
-      } catch (e) {
-        currentCalculation = 0;
-      }
-    }
-    if (currentCalculation is double && currentCalculation % 1 == 0) {
-      currentCalculation.toInt();
-    }
-  }
-
-  void _plusMinus() {
-    if (currentCalculationSTR == "Error") {
-      return;
-    }
-    if (curCalcChange) {
-      if (currentCalculation != 0) {
-        currentCalculation *= -1;
-        setState(() {
-          currentCalculationSTR = currentCalculation.toString();
-        });
-      }
-    } else {
-      if (prevCalc != 0) {
-        prevCalc *= -1;
-        setState(() {
-          currentCalculationSTR = prevCalc.toString();
-        });
-      }
-    }
-  }
+  void _plusMinus() => _runEngine(_engine.plusMinus);
 
   @override
   Widget build(BuildContext context) {
@@ -364,7 +130,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               padding: EdgeInsets.only(
                                   right: paddingfor20W, bottom: paddingFor_45),
                               child: Text(
-                                currentCalculationSTR,
+                                _engine.display,
                                 style: TextStyle(
                                   color:
                                       visualMode ? Colors.white : Colors.black,
@@ -422,7 +188,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                         padding: EdgeInsets.zero,
                                       ),
                                       child: Text(
-                                        clear,
+                                        _engine.clear,
                                         style: TextStyle(
                                           color: visualMode
                                               ? const Color.fromARGB(
