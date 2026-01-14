@@ -1,3 +1,3 @@
 # calculator
 
-A Flutter calculator app built to demonstrate Dart proficiency and cross-platform front-end design.
+A Flutter calculator app built to demonstrate Dart proficiency and cross-platform front-end design as this app would work natively as a web app regardless of platform. 
