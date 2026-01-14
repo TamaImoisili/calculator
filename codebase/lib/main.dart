@@ -68,6 +68,9 @@ class _MyHomePageState extends State<MyHomePage> {
   String prevFunction = "";
   bool visualMode = true;
   bool buttonPressed = false;
+  bool justEvaluated = false;
+  String lastFunction = "";
+  num lastOperand = 0;
 
   void _ac() {
     //Adjusts the AC button to clear and vice versa as inputs are entered
@@ -77,6 +80,8 @@ class _MyHomePageState extends State<MyHomePage> {
         currentCalculationSTR = "0";
       });
       currentCalculation = 0;
+      prevFunction = "";
+      justEvaluated = false;
       clear = "AC";
     } else {
       prevCalc = 0;
@@ -84,21 +89,35 @@ class _MyHomePageState extends State<MyHomePage> {
         currentCalculationSTR = "0";
       });
       currentCalculation = 0;
+      prevFunction = "";
+      justEvaluated = false;
     }
     buttonPressed = false;
+    curCalcChange = false;
+    calcState = false;
   }
 
   void _percentage() {
+    if (currentCalculationSTR == "Error") {
+      return;
+    }
     currentCalculation = currentCalculation / 100;
     setState(() {
       currentCalculationSTR = currentCalculation.toString();
     });
-    curCalcChange = false;
+    curCalcChange = true;
   }
 
   void _addNumber(String num) {
     // adds a number to the current value
     clear = "C";
+    if (currentCalculationSTR == "Error") {
+      _ac();
+    }
+    if (calcState || justEvaluated) {
+      currentCalculationSTR = "0";
+      justEvaluated = false;
+    }
     curCalcChange = true;
     if (calcState) {
       currentCalculationSTR = "";
@@ -129,13 +148,31 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     }
     buttonPressed = false;
+    calcState = false;
   }
 
   void _addDecimal() {
     //adds a decimal to the display but not the actual value yet.
-    setState(() {
-      currentCalculationSTR += ".";
-    });
+    if (currentCalculationSTR == "Error") {
+      _ac();
+    }
+    if (calcState || justEvaluated) {
+      currentCalculationSTR = "0";
+      calcState = false;
+      justEvaluated = false;
+    }
+    if (!currentCalculationSTR.contains(".")) {
+      setState(() {
+        currentCalculationSTR += ".";
+      });
+    }
+    try {
+      currentCalculation = double.parse(currentCalculationSTR);
+    } catch (e) {
+      // Ignore parse errors for partial input like "-".
+    }
+    clear = "C";
+    curCalcChange = true;
   }
 
   void _performCalc(String desiredFunction) {
@@ -143,101 +180,41 @@ class _MyHomePageState extends State<MyHomePage> {
     *confuses the previous and current calculations when you enter a value 
     *and press button it performs a calculation when you do not want to
     *perform one.*/
-    if (desiredFunction == "+") {
-      //addition function that adds the previous to the current calc
-      if (prevCalc == 0) {
-        prevCalc = currentCalculation;
-      } else {
-        if (curCalcChange) {
-          _performEquals();
-          if (buttonPressed) {
-            prevCalc += currentCalculation;
-            setState(() {
-              currentCalculationSTR = prevCalc.toString();
-            });
-          }
-        }
-      }
-      buttonPressed = true;
-      calcState = true;
-      curCalcChange = false;
-      prevFunction = "+";
-    } else if (desiredFunction == "-") {
-      //subtraction function that adds the previous to the current calc
-      if (prevCalc == 0) {
-        prevCalc = currentCalculation;
-      } else {
-        if (curCalcChange) {
-          _performEquals();
-          if (buttonPressed) {
-            prevCalc -= currentCalculation;
-            setState(() {
-              currentCalculationSTR = prevCalc.toString();
-            });
-          }
-        }
-      }
-      buttonPressed = true;
-      calcState = true;
-      curCalcChange = false;
-      prevFunction = "-";
-    } else if (desiredFunction == "x") {
-      //multiplication function that multiplies the previous to the current calc
-      if (prevCalc == 0) {
-        prevCalc = currentCalculation;
-      } else {
-        if (currentCalculation == 0 && prevCalc != 0) {
-          return;
-        } else {
-          if (curCalcChange) {
-            _performEquals();
-            if (buttonPressed) {
-              prevCalc *= currentCalculation;
-              setState(() {
-                currentCalculationSTR = prevCalc.toString();
-              });
-            }
-          }
-        }
-      }
-      buttonPressed = true;
-      calcState = true;
-      curCalcChange = false;
-      prevFunction = "x";
-    } else if (desiredFunction == "÷") {
-      //division isn't handled properly needs to be fixed
-      if (prevCalc == 0) {
-        prevCalc = currentCalculation;
-      } else {
-        if (curCalcChange) {
-          _performEquals();
-          if (buttonPressed) {
-            if (currentCalculation == 0) {
-              setState(() {
-                currentCalculationSTR = "Error";
-              });
-            } else {
-              prevCalc /= currentCalculation;
-              setState(() {
-                currentCalculationSTR = prevCalc.toString();
-              });
-            }
-          }
-        }
-      }
-      buttonPressed = true;
-      calcState = true;
-      curCalcChange = false;
-      prevFunction = "÷";
-    } else if (desiredFunction == "=") {
+    if (currentCalculationSTR == "Error") {
+      return;
+    }
+    if (desiredFunction == "=") {
       _performEquals();
       curCalcChange = false;
+      return;
     }
+
+    if (prevFunction.isNotEmpty && curCalcChange) {
+      _performEquals();
+    } else if (prevFunction.isEmpty) {
+      prevCalc = currentCalculation;
+    }
+
+    prevFunction = desiredFunction;
+    buttonPressed = true;
+    calcState = true;
+    curCalcChange = false;
+    justEvaluated = false;
   }
 
   void _performEquals() {
 //equals to fucntion this does the does function that was previously
     //done
+    if (currentCalculationSTR == "Error") {
+      return;
+    }
+    if (prevFunction.isEmpty && justEvaluated && lastFunction.isNotEmpty) {
+      prevFunction = lastFunction;
+      currentCalculation = lastOperand;
+    }
+    if (prevFunction.isEmpty) {
+      return;
+    }
     if (prevFunction == "+") {
       prevCalc += currentCalculation;
       setState(() {
@@ -273,10 +250,21 @@ class _MyHomePageState extends State<MyHomePage> {
         prevFunction = "÷";
       }
     }
+    if (currentCalculationSTR != "Error") {
+      lastFunction = prevFunction;
+      lastOperand = currentCalculation;
+    }
+    currentCalculation = prevCalc;
+    prevFunction = "";
     buttonPressed = false;
+    justEvaluated = true;
   }
 
   void _undo() {
+    if (currentCalculationSTR == "Error") {
+      _ac();
+      return;
+    }
     if (currentCalculationSTR.isNotEmpty) {
       setState(() {
         currentCalculationSTR = currentCalculationSTR.substring(
@@ -293,7 +281,11 @@ class _MyHomePageState extends State<MyHomePage> {
     try {
       currentCalculation = int.parse(currentCalculationSTR);
     } catch (e) {
-      currentCalculation = double.parse(currentCalculationSTR);
+      try {
+        currentCalculation = double.parse(currentCalculationSTR);
+      } catch (e) {
+        currentCalculation = 0;
+      }
     }
     if (currentCalculation is double && currentCalculation % 1 == 0) {
       currentCalculation.toInt();
@@ -301,6 +293,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _plusMinus() {
+    if (currentCalculationSTR == "Error") {
+      return;
+    }
     if (curCalcChange) {
       if (currentCalculation != 0) {
         currentCalculation *= -1;
